@@ -1,0 +1,15 @@
+[package]
+name = "space_bevy_rapier3d_plugin"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Space bevy_rapier3d plugin for space_editor crate"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bevy.workspace = true 
+space_editor_ui.workspace = true
+bevy_rapier3d = { version = "0.26" }
+tracing = "0.1"

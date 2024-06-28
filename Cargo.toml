@@ -35,7 +35,6 @@ homepage = "https://github.com/rewin123/space_editor"
 
 [workspace.dependencies]
 bevy = "0.13.1"
-
 # Editor Crates
 space_prefab = { version = "0.5.0", path = "crates/prefab" }
 space_shared = { version = "0.5.0", path = "crates/shared" }
@@ -75,6 +74,7 @@ serde = "1"
 
 # Community Modules
 space_bevy_xpbd_plugin = { version = "0.5.0", path = "modules/bevy_xpbd_plugin"}
+space_bevy_rapier3d_plugin = { version = "0.5.0", path = "modules/bevy_rapier3d_plugin"}
 
 [dependencies]
 bevy.workspace = true
@@ -83,6 +83,7 @@ space_prefab.workspace = true
 
 # Modules for external crates
 space_bevy_xpbd_plugin = { workspace = true, optional = true }
+space_bevy_rapier3d_plugin = { workspace = true, optional = true }
 
 # For versions 1.74+
 [workspace.lints.rust]
@@ -99,6 +100,9 @@ significant_drop_in_scrutinee = { level = "allow", priority = 2 }
 significant_drop_tightening = { level = "allow", priority = 2 }
 too_many_arguments = { level = "allow", priority = 2 }
 
+[dev-dependencies]
+bevy_rapier3d = { version = "0.26" }
+
 [lints]
 workspace = true
 
@@ -107,10 +111,11 @@ opt-level = 3
 
 [features]
 bevy_xpbd_3d = ["dep:space_bevy_xpbd_plugin"]
+bevy_rapier3d_plugin = ["dep:space_bevy_rapier3d_plugin"]
 persistence_editor = []
 no_event_registration = ["space_prefab/no_event_registration"]
 editor = ["space_prefab/editor", "space_editor_ui/editor"]
-default = ["bevy_xpbd_3d", "persistence_editor", "editor"]
+default = ["bevy_xpbd_3d", "persistence_editor", "editor", "bevy_rapier3d_plugin"]
 
 [[example]]
 name = "platformer"

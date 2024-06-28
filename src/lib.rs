@@ -7,6 +7,9 @@ pub mod prelude {
 
     #[cfg(feature = "bevy_xpbd_3d")]
     pub use space_bevy_xpbd_plugin::prelude::*;
+    #[cfg(feature = "bevy_rapier3d_plugin")]
+    #[cfg(not(feature = "bevy_xpbd_3d"))]
+    pub use space_bevy_rapier3d_plugin::prelude::*;
 }
 
 pub use space_editor_ui;
@@ -14,6 +17,10 @@ pub use space_prefab;
 
 #[cfg(feature = "bevy_xpbd_3d")]
 pub use space_bevy_xpbd_plugin;
+#[cfg(feature = "bevy_rapier3d_plugin")]
+#[cfg(not(feature = "bevy_xpbd_3d"))]
+pub use space_bevy_rapier3d_plugin;
+
 
 /// This is the main plugin, connecting it will allow you to use all the functions of space_editor
 pub struct SpaceEditorPlugin;
@@ -24,5 +31,8 @@ impl bevy::app::Plugin for SpaceEditorPlugin {
 
         #[cfg(feature = "bevy_xpbd_3d")]
         app.add_plugins(space_bevy_xpbd_plugin::XpbdPlugin);
+        #[cfg(feature = "bevy_rapier3d_plugin")]
+        #[cfg(not(feature = "bevy_xpbd_3d"))]
+        app.add_plugins(space_bevy_rapier3d_plugin::RapierPlugin);
     }
 }
